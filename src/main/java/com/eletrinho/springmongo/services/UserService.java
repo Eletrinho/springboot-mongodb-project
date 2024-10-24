@@ -32,4 +32,11 @@ public class UserService {
         findById(id);
         userRepository.deleteById(id);
     }
+
+    public User put(User user) {
+        User obj = findById(user.getId());
+        obj.setEmail(user.getEmail());
+        obj.setName(user.getName());
+        return userRepository.save(obj);
+    }
 }

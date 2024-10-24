@@ -3,6 +3,7 @@ package com.eletrinho.springmongo.resources;
 import com.eletrinho.springmongo.dto.UserDTO;
 import com.eletrinho.springmongo.entities.User;
 import com.eletrinho.springmongo.services.UserService;
+import com.mongodb.DBObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -43,5 +44,11 @@ public class UserResource {
     public ResponseEntity<Void> delete(@PathVariable String id) {
         userService.deleteById(id);
         return ResponseEntity.noContent().build();
+    }
+
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<UserDTO> put(@PathVariable String id, @RequestBody UserDTO userDTO) {
+        User user = new User(id, userDTO.getName(), userDTO.getEmail());
+        return ResponseEntity.ok(new UserDTO(userService.put(user)));
     }
 }
