@@ -1,6 +1,6 @@
 package com.eletrinho.springmongo.resources;
 
-import com.eletrinho.springmongo.entities.User;
+import com.eletrinho.springmongo.dto.UserDTO;
 import com.eletrinho.springmongo.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,7 +18,8 @@ public class UserResource {
     private UserService userService;
 
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
-        return ResponseEntity.ok(userService.findAll());
+    public ResponseEntity<List<UserDTO>> findAll() {
+        List<UserDTO> list = userService.findAll().stream().map(UserDTO::new).toList();
+        return ResponseEntity.ok(list);
     }
 }
