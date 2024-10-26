@@ -1,6 +1,7 @@
 package com.eletrinho.springmongo.resources;
 
 import com.eletrinho.springmongo.dto.UserDTO;
+import com.eletrinho.springmongo.entities.Post;
 import com.eletrinho.springmongo.entities.User;
 import com.eletrinho.springmongo.services.UserService;
 import com.mongodb.DBObject;
@@ -28,6 +29,11 @@ public class UserResource {
     @GetMapping(value = "/{id}")
     public ResponseEntity<UserDTO> findById(@PathVariable String id) {
         return ResponseEntity.ok(new UserDTO(userService.findById(id)));
+    }
+
+    @GetMapping(value = "/{id}/posts")
+    public ResponseEntity<List<Post>> findPostsByUser(@PathVariable String id) {
+        return ResponseEntity.ok(userService.findById(id).getPosts());
     }
 
     @PostMapping
