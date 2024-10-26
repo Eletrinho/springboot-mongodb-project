@@ -1,6 +1,7 @@
 package com.eletrinho.springmongo.config;
 
 import com.eletrinho.springmongo.dto.AuthorDTO;
+import com.eletrinho.springmongo.entities.CommentDTO;
 import com.eletrinho.springmongo.entities.Post;
 import com.eletrinho.springmongo.entities.User;
 import com.eletrinho.springmongo.repository.PostRepository;
@@ -33,7 +34,11 @@ public class Instantiation implements CommandLineRunner {
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
 
         Post post = new Post(null, Instant.now(), "Partiu viagem", "Bó viaja", new AuthorDTO(maria));
+        post.getComments().add(new CommentDTO("Boa viagem", Instant.now(), new AuthorDTO(alex)));
+        post.getComments().add(new CommentDTO("Aproveite", Instant.now(), new AuthorDTO(bob)));
+
         Post post2 = new Post(null, Instant.now(), "Bom dia", "acordei agora", new AuthorDTO(maria));
+        post2.getComments().add(new CommentDTO("Tenha um ótimo dia", Instant.now(), new AuthorDTO(alex)));
 
         postRepository.saveAll(Arrays.asList(post, post2));
 
