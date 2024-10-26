@@ -17,7 +17,6 @@ public class UserDTO implements Serializable {
         email = obj.getEmail();
     }
 
-
     public String getName() {
         return name;
     }
