@@ -8,6 +8,7 @@ import com.eletrinho.springmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -33,8 +34,16 @@ public class PostService {
 
     public Post put(Post post) {
         Post obj = findById(post.getId());
-        obj.setTitle(post.getTitle());
+        obj.setTitle(post.getTitle())   ;
         obj.setBody(post.getBody());
         return postRepository.save(obj);
+    }
+
+    public List<Post> findAfter(Instant instant) {
+        return postRepository.findByDateAfter(instant);
+    }
+
+    public List<Post> findBefore(Instant instant) {
+        return postRepository.findByDateBefore(instant);
     }
 }
