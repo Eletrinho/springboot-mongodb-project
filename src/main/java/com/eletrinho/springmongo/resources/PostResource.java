@@ -49,4 +49,9 @@ public class PostResource {
         Instant date = LocalDate.parse(text, DateTimeFormatter.ofPattern("dd MM yyyy")).atStartOfDay().toInstant(ZoneOffset.UTC);
         return ResponseEntity.ok(postService.findBefore(date));
     }
+
+    @GetMapping(value = "/search/title")
+    public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "title") String text) {
+        return ResponseEntity.ok(postService.findByTitle(URL.decodeParam(text)));
+    }
 }

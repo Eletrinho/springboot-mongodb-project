@@ -46,4 +46,8 @@ public class PostService {
     public List<Post> findBefore(Instant instant) {
         return postRepository.findByDateBefore(instant);
     }
+
+    public List<Post> findByTitle(String text) {
+        return postRepository.findByTitle(text);
+    }
 }
