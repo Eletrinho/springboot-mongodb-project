@@ -34,7 +34,7 @@ Este projeto Spring Boot demonstra a integração com o MongoDB para gerenciar u
     - Configure a URL de conexão com o MongoDB no arquivo `application.properties` ou `application.yml`.
 
 3. **Inicialização**:
-    - Execute a classe principal da aplicação [SpringmongoApplication.java](src/main/java/com/eletrinho/springmongo/SpringmongoApplication.java) para iniciar o servidor Spring Boot.
+    - Execute a classe principal da aplicação [SpringMongoApplication.java](src/main/java/com/eletrinho/springmongo/SpringMongoApplication.java) para iniciar o servidor Spring Boot.
 
 ## Próximos Passos
 - Implementar autenticação e autorização para usuários.
