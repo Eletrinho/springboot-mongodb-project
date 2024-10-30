@@ -15,5 +15,6 @@ public interface PostRepository extends MongoRepository<Post, String> {
     List<Post> findByTitle(String text);
 
     List<Post> findByDateAfter(Instant date);
+
     List<Post> findByDateBefore(Instant date);
 }

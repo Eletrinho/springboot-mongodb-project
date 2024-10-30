@@ -1,9 +1,7 @@
 package com.eletrinho.springmongo.services;
 
 import com.eletrinho.springmongo.entities.Post;
-import com.eletrinho.springmongo.entities.User;
 import com.eletrinho.springmongo.repository.PostRepository;
-import com.eletrinho.springmongo.repository.UserRepository;
 import com.eletrinho.springmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,7 +32,7 @@ public class PostService {
 
     public Post put(Post post) {
         Post obj = findById(post.getId());
-        obj.setTitle(post.getTitle())   ;
+        obj.setTitle(post.getTitle());
         obj.setBody(post.getBody());
         return postRepository.save(obj);
     }

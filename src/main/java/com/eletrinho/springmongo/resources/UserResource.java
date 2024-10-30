@@ -4,7 +4,6 @@ import com.eletrinho.springmongo.dto.UserDTO;
 import com.eletrinho.springmongo.entities.Post;
 import com.eletrinho.springmongo.entities.User;
 import com.eletrinho.springmongo.services.UserService;
-import com.mongodb.DBObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
