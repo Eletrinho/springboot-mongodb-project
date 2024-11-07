@@ -4,6 +4,8 @@ import com.eletrinho.springmongo.entities.Post;
 import com.eletrinho.springmongo.repository.PostRepository;
 import com.eletrinho.springmongo.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
@@ -15,6 +17,11 @@ public class PostService {
 
     @Autowired
     private PostRepository postRepository;
+
+    public List<Post> findFist25() {
+        Pageable first25 = PageRequest.of(0, 25);
+        return postRepository.findAll(first25).getContent();
+    }
 
     public Post findById(String id) {
         Optional<Post> user = postRepository.findById(id);

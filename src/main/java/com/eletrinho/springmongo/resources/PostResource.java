@@ -13,12 +13,18 @@ import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
+@CrossOrigin(origins = "http://localhost:3000/")
 @RestController
 @RequestMapping(value = "/posts")
 public class PostResource {
 
     @Autowired
     private PostService postService;
+
+    @GetMapping
+    public ResponseEntity<List<Post>> findFist25() {
+        return ResponseEntity.ok(postService.findFist25());
+    }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Post> findById(@PathVariable String id) {
