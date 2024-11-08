@@ -24,6 +24,9 @@ public class UserService {
         return user.orElseThrow(() -> new ObjectNotFoundException(id));
     }
 
+    public User findByUsername(String name){
+        return userRepository.findByUsername(name);
+    }
     public User insert(User user) {
         return userRepository.save(user);
     }
@@ -37,6 +40,7 @@ public class UserService {
         User obj = findById(user.getId());
         obj.setEmail(user.getEmail());
         obj.setName(user.getName());
+        obj.setPassword(user.getPassword());
         return userRepository.save(obj);
     }
 }

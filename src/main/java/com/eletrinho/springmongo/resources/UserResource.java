@@ -36,8 +36,8 @@ public class UserResource {
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> insert(@RequestBody UserDTO userDTO) {
-        User user = new User(null, userDTO.getName(), userDTO.getEmail());
+    public ResponseEntity<UserDTO> insert(@RequestBody User user) {
+        UserDTO userDTO = new UserDTO(user);
         user = userService.insert(user);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")
@@ -52,8 +52,7 @@ public class UserResource {
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<UserDTO> put(@PathVariable String id, @RequestBody UserDTO userDTO) {
-        User user = new User(id, userDTO.getName(), userDTO.getEmail());
+    public ResponseEntity<UserDTO> put(@PathVariable String id, @RequestBody User user) {
         return ResponseEntity.ok(new UserDTO(userService.put(user)));
     }
 }

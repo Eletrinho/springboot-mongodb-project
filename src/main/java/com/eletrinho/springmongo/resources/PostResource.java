@@ -1,5 +1,6 @@
 package com.eletrinho.springmongo.resources;
 
+import com.eletrinho.springmongo.config.util.JwtUtil;
 import com.eletrinho.springmongo.entities.Post;
 import com.eletrinho.springmongo.resources.util.URL;
 import com.eletrinho.springmongo.services.PostService;
@@ -32,14 +33,16 @@ public class PostResource {
     }
 
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable String id) {
-        postService.deleteById(id);
+    public ResponseEntity<Void> delete(@PathVariable String id, @RequestHeader("Authorization") String token) {
+        String username = JwtUtil.extractUsername(token.substring(7));
+        postService.deleteById(id, username);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping(value = "/{id}")
-    public ResponseEntity<Post> put(@PathVariable String id, @RequestBody Post post) {
-        return ResponseEntity.ok(postService.put(post));
+    public ResponseEntity<Post> put(@PathVariable String id, @RequestBody Post post, @RequestHeader("Authorization") String token) {
+        String username = JwtUtil.extractUsername(token.substring(7));
+        return ResponseEntity.ok(postService.put(post, id, username));
     }
 
     @GetMapping(value = "/search/after")

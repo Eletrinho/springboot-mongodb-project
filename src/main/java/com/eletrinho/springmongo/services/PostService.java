@@ -3,6 +3,7 @@ package com.eletrinho.springmongo.services;
 import com.eletrinho.springmongo.entities.Post;
 import com.eletrinho.springmongo.repository.PostRepository;
 import com.eletrinho.springmongo.services.exception.ObjectNotFoundException;
+import com.eletrinho.springmongo.services.exception.UnauthorizedException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
@@ -32,16 +33,23 @@ public class PostService {
         return postRepository.save(post);
     }
 
-    public void deleteById(String id) {
-        findById(id);
-        postRepository.deleteById(id);
+    public void deleteById(String id, String currentUsername) {
+        Post obj = findById(id);
+        if (currentUsername.equals(obj.getAuthor().getUsername())) {
+            postRepository.deleteById(id);
+            return;
+        }
+        throw new UnauthorizedException("Você não é dono dessa postagem");
     }
 
-    public Post put(Post post) {
-        Post obj = findById(post.getId());
-        obj.setTitle(post.getTitle());
-        obj.setBody(post.getBody());
-        return postRepository.save(obj);
+    public Post put(Post post, String id, String currentUsername) {
+        Post obj = findById(id);
+        if (currentUsername.equals(obj.getAuthor().getUsername())) {
+            obj.setTitle(post.getTitle());
+            obj.setBody(post.getBody());
+            return postRepository.save(obj);
+        }
+        throw new UnauthorizedException("Você não é dono dessa postagem");
     }
 
     public List<Post> findAfter(Instant instant) {

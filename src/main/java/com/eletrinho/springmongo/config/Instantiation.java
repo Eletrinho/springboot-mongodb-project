@@ -27,9 +27,9 @@ public class Instantiation implements CommandLineRunner {
         userRepository.deleteAll();
         postRepository.deleteAll();
 
-        User maria = new User(null, "Maria Brown", "maria@gmail.com");
-        User alex = new User(null, "Alex Green", "alex@gmail.com");
-        User bob = new User(null, "Bob Grey", "bob@gmail.com");
+        User maria = new User(null, "Maria Brown", "mariabrown","maria@gmail.com", "maria");
+        User alex = new User(null, "Alex Green", "alexgreen","alex@gmail.com", "alex");
+        User bob = new User(null,  "Bob Grey", "bobgrey","bob@gmail.com", "bob");
 
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
 

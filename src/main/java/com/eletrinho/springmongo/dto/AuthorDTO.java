@@ -8,6 +8,7 @@ public class AuthorDTO implements Serializable {
 
     private String id;
     private String name;
+    private String username;
 
     public AuthorDTO() {
 
@@ -16,6 +17,7 @@ public class AuthorDTO implements Serializable {
     public AuthorDTO(User obj) {
         id = obj.getId();
         name = obj.getName();
+        username = obj.getUsername();
     }
 
     public String getId() {
@@ -24,5 +26,9 @@ public class AuthorDTO implements Serializable {
 
     public String getName() {
         return name;
+    }
+
+    public String getUsername() {
+        return username;
     }
 }
