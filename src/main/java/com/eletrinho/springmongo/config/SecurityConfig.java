@@ -1,5 +1,7 @@
 package com.eletrinho.springmongo.config;
 
+import com.eletrinho.springmongo.config.exception.AccessDenied;
+import com.eletrinho.springmongo.config.exception.AuthenticationDenied;
 import com.eletrinho.springmongo.resources.util.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -21,7 +23,10 @@ public class SecurityConfig {
                         .requestMatchers("/posts", "/posts/**").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(new JwtAuthenticationFilter(),
-                        UsernamePasswordAuthenticationFilter.class);
+                        UsernamePasswordAuthenticationFilter.class).
+                exceptionHandling(ex -> ex
+                        .authenticationEntryPoint(new AuthenticationDenied())
+                        .accessDeniedHandler(new AccessDenied()));
 
         return http.build();
     }
