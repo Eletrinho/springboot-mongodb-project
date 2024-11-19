@@ -1,5 +1,6 @@
 package com.eletrinho.springmongo.config;
 
+import com.eletrinho.springmongo.config.util.PasswordUtil;
 import com.eletrinho.springmongo.dto.AuthorDTO;
 import com.eletrinho.springmongo.entities.CommentDTO;
 import com.eletrinho.springmongo.entities.Post;
@@ -27,9 +28,9 @@ public class Instantiation implements CommandLineRunner {
         userRepository.deleteAll();
         postRepository.deleteAll();
 
-        User maria = new User(null, "Maria Brown", "mariabrown","maria@gmail.com", "maria");
-        User alex = new User(null, "Alex Green", "alexgreen","alex@gmail.com", "alex");
-        User bob = new User(null,  "Bob Grey", "bobgrey","bob@gmail.com", "bob");
+        User maria = new User(null, "Maria Brown", "mariabrown","maria@gmail.com", PasswordUtil.getPasswordHash("maria"));
+        User alex = new User(null, "Alex Green", "alexgreen","alex@gmail.com", PasswordUtil.getPasswordHash("alex"));
+        User bob = new User(null,  "Bob Grey", "bobgrey","bob@gmail.com", PasswordUtil.getPasswordHash("bob"));
 
         userRepository.saveAll(Arrays.asList(maria, alex, bob));
 

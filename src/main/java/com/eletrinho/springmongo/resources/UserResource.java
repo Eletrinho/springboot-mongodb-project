@@ -1,5 +1,6 @@
 package com.eletrinho.springmongo.resources;
 
+import com.eletrinho.springmongo.config.util.PasswordUtil;
 import com.eletrinho.springmongo.dto.UserDTO;
 import com.eletrinho.springmongo.entities.Post;
 import com.eletrinho.springmongo.entities.User;
@@ -38,6 +39,7 @@ public class UserResource {
     @PostMapping
     public ResponseEntity<UserDTO> insert(@RequestBody User user) {
         UserDTO userDTO = new UserDTO(user);
+        user.setPassword(PasswordUtil.getPasswordHash(user.getPassword()));
         user = userService.insert(user);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest()
                 .path("/{id}")

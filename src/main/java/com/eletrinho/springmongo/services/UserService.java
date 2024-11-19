@@ -24,9 +24,10 @@ public class UserService {
         return user.orElseThrow(() -> new ObjectNotFoundException(id));
     }
 
-    public User findByUsername(String name){
+    public User findByUsername(String name) {
         return userRepository.findByUsername(name);
     }
+
     public User insert(User user) {
         return userRepository.save(user);
     }
