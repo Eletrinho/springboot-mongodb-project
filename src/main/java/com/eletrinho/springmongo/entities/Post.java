@@ -16,7 +16,6 @@ public class Post implements Serializable {
     @Id
     private String id;
     private Instant date;
-    private String title;
     private String body;
     private AuthorDTO author;
     private List<CommentDTO> comments = new ArrayList<>();
@@ -25,10 +24,9 @@ public class Post implements Serializable {
 
     }
 
-    public Post(String id, Instant date, String title, String body, AuthorDTO author) {
+    public Post(String id, Instant date, String body, AuthorDTO author) {
         this.id = id;
         this.date = date;
-        this.title = title;
         this.body = body;
         this.author = author;
     }
@@ -43,14 +41,6 @@ public class Post implements Serializable {
 
     public void setDate(Instant date) {
         this.date = date;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
     }
 
     public String getBody() {

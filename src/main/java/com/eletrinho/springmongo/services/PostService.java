@@ -45,7 +45,6 @@ public class PostService {
     public Post put(Post post, String id, String currentUsername) {
         Post obj = findById(id);
         if (currentUsername.equals(obj.getAuthor().getUsername())) {
-            obj.setTitle(post.getTitle());
             obj.setBody(post.getBody());
             return postRepository.save(obj);
         }
