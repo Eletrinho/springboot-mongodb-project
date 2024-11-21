@@ -45,6 +45,12 @@ public class PostResource {
         return ResponseEntity.ok(postService.put(post, id, username));
     }
 
+    @GetMapping(value = "/search")
+    public ResponseEntity<List<Post>> findByAuthor(@RequestParam(value = "username") String text) {
+        text = URL.decodeParam(text);
+        return ResponseEntity.ok(postService.findByAuthor(text));
+    }
+    
     @GetMapping(value = "/search/after")
     public ResponseEntity<List<Post>> findAfter(@RequestParam(value = "date") String text) {
         text = URL.decodeParam(text);

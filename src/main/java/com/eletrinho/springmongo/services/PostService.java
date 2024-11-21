@@ -51,6 +51,10 @@ public class PostService {
         throw new UnauthorizedException("Você não é dono dessa postagem");
     }
 
+    public List<Post> findByAuthor(String username){
+        return postRepository.findByAuthor(username);
+    }
+
     public List<Post> findAfter(Instant instant) {
         return postRepository.findByDateAfter(instant);
     }

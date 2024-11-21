@@ -17,4 +17,7 @@ public interface PostRepository extends MongoRepository<Post, String> {
     List<Post> findByDateAfter(Instant date);
 
     List<Post> findByDateBefore(Instant date);
+
+    @Query("{'author.username': { $regex: ?0, $options: 'i' } }")
+    List<Post> findByAuthor(String username);
 }
