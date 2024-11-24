@@ -62,6 +62,9 @@ public class Post implements Serializable {
         return comments;
     }
 
+    public void addComment(CommentDTO comment) {
+        comments.add(comment);
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -26,6 +26,8 @@ public class AuthResource {
     @PostMapping("/login")
     public ResponseEntity<LoginResponseDTO> login(@RequestBody UserLoginRequest loginRequest) {
         User user = userService.findByUsername(loginRequest.getUsername());
+        if (user == null) throw new UnauthorizedException("Dados de login incorretos");
+
         if (PasswordUtil.verifyPassword(loginRequest.getPassword(), user.getPassword())) {
             String token = JwtUtil.generateToken(loginRequest.getUsername());
             LoginResponseDTO response = new LoginResponseDTO(token, "Login successful");

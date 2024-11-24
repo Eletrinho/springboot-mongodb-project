@@ -8,16 +8,15 @@ import java.time.Instant;
 public class CommentDTO implements Serializable {
 
     private String text;
-    private Instant date;
+    private Instant date = Instant.now();
     private AuthorDTO author;
 
     public CommentDTO() {
 
     }
 
-    public CommentDTO(String text, Instant date, AuthorDTO author) {
+    public CommentDTO(String text, AuthorDTO author) {
         this.text = text;
-        this.date = date;
         this.author = author;
     }
 
@@ -35,5 +34,9 @@ public class CommentDTO implements Serializable {
 
     public AuthorDTO getAuthor() {
         return author;
+    }
+
+    public void setAuthor(AuthorDTO author) {
+        this.author = author;
     }
 }
