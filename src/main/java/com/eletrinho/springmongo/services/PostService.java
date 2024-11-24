@@ -1,6 +1,9 @@
 package com.eletrinho.springmongo.services;
 
+import com.eletrinho.springmongo.config.util.JwtUtil;
+import com.eletrinho.springmongo.dto.AuthorDTO;
 import com.eletrinho.springmongo.entities.Post;
+import com.eletrinho.springmongo.entities.User;
 import com.eletrinho.springmongo.repository.PostRepository;
 import com.eletrinho.springmongo.services.exception.ObjectNotFoundException;
 import com.eletrinho.springmongo.services.exception.UnauthorizedException;
@@ -19,6 +22,9 @@ public class PostService {
     @Autowired
     private PostRepository postRepository;
 
+    @Autowired
+    private UserService userService;
+
     public List<Post> findFist25() {
         Pageable first25 = PageRequest.of(0, 25);
         return postRepository.findAll(first25).getContent();
@@ -29,7 +35,9 @@ public class PostService {
         return user.orElseThrow(() -> new ObjectNotFoundException(id));
     }
 
-    public Post insert(Post post) {
+    public Post insert(Post post, String token) {
+        String username = JwtUtil.extractUsername(token.substring(7));
+        post.setAuthor(new AuthorDTO(userService.findByUsername(username)));
         return postRepository.save(post);
     }
 

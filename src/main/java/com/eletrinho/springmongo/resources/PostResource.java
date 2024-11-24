@@ -5,6 +5,7 @@ import com.eletrinho.springmongo.entities.Post;
 import com.eletrinho.springmongo.resources.util.URL;
 import com.eletrinho.springmongo.services.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,6 +31,11 @@ public class PostResource {
     @GetMapping(value = "/{id}")
     public ResponseEntity<Post> findById(@PathVariable String id) {
         return ResponseEntity.ok(postService.findById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<Post> insert(@RequestBody Post post, @RequestHeader("Authorization") String token) {
+        return ResponseEntity.ok(postService.insert(post,token));
     }
 
     @DeleteMapping(value = "/{id}")

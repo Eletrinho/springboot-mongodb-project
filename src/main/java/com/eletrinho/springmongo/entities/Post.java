@@ -15,7 +15,7 @@ public class Post implements Serializable {
 
     @Id
     private String id;
-    private Instant date;
+    private Instant date = Instant.now();
     private String body;
     private AuthorDTO author;
     private List<CommentDTO> comments = new ArrayList<>();
@@ -24,9 +24,8 @@ public class Post implements Serializable {
 
     }
 
-    public Post(String id, Instant date, String body, AuthorDTO author) {
+    public Post(String id, String body, AuthorDTO author) {
         this.id = id;
-        this.date = date;
         this.body = body;
         this.author = author;
     }
@@ -53,6 +52,10 @@ public class Post implements Serializable {
 
     public AuthorDTO getAuthor() {
         return author;
+    }
+
+    public void setAuthor(AuthorDTO author) {
+        this.author = author;
     }
 
     public List<CommentDTO> getComments() {
